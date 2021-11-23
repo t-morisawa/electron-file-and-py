@@ -36,8 +36,11 @@ app.whenReady().then(() => {
     return get_images_and_dirs(path)
   });
 
-  ipcMain.handle('run_py', (e) => {
-    return run_py()
+  ipcMain.handle('run_py', async (e) => {
+    res = await run_py()
+    if (res.success == true) {
+      return res.results
+    }
   });
 })
 
