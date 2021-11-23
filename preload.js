@@ -16,4 +16,5 @@ window.addEventListener('DOMContentLoaded', () => {
 
 contextBridge.exposeInMainWorld('api', {
   getImagesAndDirs: (path) => ipcRenderer.invoke('get_images_and_dirs', path),
+  runPy: () => ipcRenderer.invoke('run_py'),
 });

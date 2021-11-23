@@ -1,6 +1,4 @@
 // main.js
-const { get_images_and_dirs } = require('./file')
-
 // アプリケーションの寿命の制御と、ネイティブなブラウザウインドウを作成するモジュール
 const { app, BrowserWindow, ipcMain } = require('electron')
 const path = require('path')
@@ -37,6 +35,10 @@ app.whenReady().then(() => {
   ipcMain.handle('get_images_and_dirs', (e, path) => {
     return get_images_and_dirs(path)
   });
+
+  ipcMain.handle('run_py', (e) => {
+    return run_py()
+  });
 })
 
 // macOS を除き、全ウインドウが閉じられたときに終了します。 ユーザーが
@@ -49,3 +51,5 @@ app.on('window-all-closed', () => {
 // このファイルでは、アプリ内のとある他のメインプロセスコードを
 // インクルードできます。 
 // 別々のファイルに分割してここで require することもできます。
+const { get_images_and_dirs } = require('./file')
+const { run_py } = require('./run_py')
