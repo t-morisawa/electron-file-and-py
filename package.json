@@ -20,7 +20,8 @@
     "electron": "^16.0.1"
   },
   "dependencies": {
-    "electron-squirrel-startup": "^1.0.0"
+    "electron-squirrel-startup": "^1.0.0",
+    "python-shell": "^3.0.1"
   },
   "config": {
     "forge": {
