@@ -6,8 +6,9 @@ window.addEventListener('DOMContentLoaded', () => {
 })
 
 const onClickRunPythonButton = async () => {
-  const results = await window.api.runPy();
   const resultListElem = document.getElementById('py_result_list')
+  resultListElem.innerHTML = ""
+  const results = await window.api.runPy();
   results.forEach((result) => {
     const element = document.createElement('li')
     element.innerText = result
