@@ -8,7 +8,7 @@ window.addEventListener('DOMContentLoaded', async () => {
         element.dataset.fullPath = file.full_path
         element.dataset.isDir = file.is_dir
         element.addEventListener('click', (e) => {
-            addEventListener(e)
+            onClickFileName(e)
         })
         fileListElem.appendChild(element)
     });
@@ -17,7 +17,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 
 
 // ファイル・ディレクトリクリック時のイベントを追加
-const addEventListener = async (e) => {
+const onClickFileName = async (e) => {
     document.getElementById('selected_file').innerText = e.target.innerText
 
     const imageElem = document.getElementById('image')
