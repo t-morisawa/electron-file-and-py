@@ -6,9 +6,14 @@ window.addEventListener('DOMContentLoaded', async () => {
         const element = document.createElement('li')
         element.innerText = file.name
         element.dataset.fullPath = file.full_path
+        element.dataset.isDir = file.is_dir
         element.addEventListener('click', (e) => {
             document.getElementById('selected_file').innerText = e.target.innerText
-            document.getElementById('image').src = e.target.dataset.fullPath
+            if (e.target.dataset.isDir == "true") {
+                document.getElementById('image').src = ""
+            } else {
+                document.getElementById('image').src = e.target.dataset.fullPath
+            }
         })
         fileListElem.appendChild(element)
     });
