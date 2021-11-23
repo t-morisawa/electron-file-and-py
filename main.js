@@ -34,7 +34,7 @@ app.whenReady().then(() => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
   })
 
-  ipcMain.handle('get_images_and_dirs', async (e, path) => {
+  ipcMain.handle('get_images_and_dirs', (e, path) => {
     return get_images_and_dirs(path)
   });
 })
