@@ -1,4 +1,21 @@
-window.addEventListener('DOMContentLoaded', async () => {
+window.addEventListener('DOMContentLoaded', () => {
+  showFileList()
+  document.getElementById('run_py_button').addEventListener('click', (e) => {
+    onClickRunPythonButton()
+  })
+})
+
+const onClickRunPythonButton = async () => {
+  const results = await window.api.runPy();
+  const resultListElem = document.getElementById('py_result_list')
+  results.forEach((result) => {
+    const element = document.createElement('li')
+    element.innerText = result
+    resultListElem.appendChild(element)
+  })
+}
+
+const showFileList = async () => {
   const rootDir = "/tmp/sample";
   const fileList = await window.api.getImagesAndDirs(rootDir);
   const fileListElem = document.getElementById('file_list')
@@ -13,8 +30,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     fileListElem.appendChild(element)
   });
   document.getElementById('dir_name').innerText = rootDir
-})
-
+}
 
 // ファイル・ディレクトリクリック時のイベントを追加
 const onClickFileName = async (e) => {
