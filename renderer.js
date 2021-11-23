@@ -29,6 +29,7 @@ const onClickFileName = async (e) => {
         imageListElem.innerHTML = ""
         const fileList = await window.api.getImagesAndDirs(e.target.dataset.fullPath);
         fileList.forEach((file) => {
+            if (file.isDir == "true") return
             const element = document.createElement('img')
             element.src = file.full_path
             element.width = 200
