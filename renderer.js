@@ -8,7 +8,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 /**
  * Pythonプログラムの実行命令
- * レンダラプロセスではawaitしない(Pythonプロセスの終了を待たない)
+ * awaitしない(Pythonプロセスの終了を待たない)
  */
 const onClickRunPythonButton = () => {
   const resultListElem = document.getElementById('py_result_list')
