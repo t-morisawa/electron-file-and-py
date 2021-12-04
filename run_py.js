@@ -1,14 +1,22 @@
 const { PythonShell } = require('python-shell');
+const { webContents } = require('electron')
 
+const run_py = () => {
+  let pyshell = new PythonShell('./py/hello.py', {pythonOptions: ['-u']});
+  const webcontent = webContents.getAllWebContents()[0]
 
-const run_py = async () => await new Promise(
-  (resolve, reject) => {
-    PythonShell.run('./py/hello.py', {}, function (err, results) {
-      if (err) reject({ success: false, err });
-      resolve({ success: true, results });
-    });
-  }
-)
+  pyshell.on('message', function (message) {
+    webcontent.send("python-message", message)
+  });
+
+  pyshell.end(function (err,code,signal) {
+    if (err) throw err;
+    console.log('The exit code was: ' + code);
+    console.log('The exit signal was: ' + signal);
+    console.log('finished');
+    webcontent.send("python-end", code, signal)
+  });
+}
 
 module.exports = {
   run_py

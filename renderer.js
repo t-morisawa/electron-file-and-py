@@ -3,17 +3,18 @@ window.addEventListener('DOMContentLoaded', () => {
   document.getElementById('run_py_button').addEventListener('click', (e) => {
     onClickRunPythonButton()
   })
+  window.api.addListenerOnPythonMessage(onPythonMessage)
+  window.api.addListenerOnPythonEnd(onPythonEnd)
 })
 
-const onClickRunPythonButton = async () => {
+/**
+ * Pythonプログラムの実行命令
+ * awaitしない(Pythonプロセスの終了を待たない)
+ */
+const onClickRunPythonButton = () => {
   const resultListElem = document.getElementById('py_result_list')
   resultListElem.innerHTML = ""
-  const results = await window.api.runPy();
-  results.forEach((result) => {
-    const element = document.createElement('li')
-    element.innerText = result
-    resultListElem.appendChild(element)
-  })
+  window.api.runPy();
 }
 
 const showFileList = async () => {
@@ -57,4 +58,24 @@ const onClickFileName = async (e) => {
     imageListElem.style.display = "none"
     imageElem.src = e.target.dataset.fullPath
   }
+}
+
+/**
+ * Pythonプログラムから message が送信されたタイミングで発火するイベント
+ */
+const onPythonMessage = (message) => { 
+  const resultListElem = document.getElementById('py_result_list')
+  const element = document.createElement('li')
+  element.innerText = message
+  resultListElem.appendChild(element)
+}
+
+/**
+ * Pythonプログラムが終了したときに発火するイベント
+ */
+ const onPythonEnd = (code, signal) => { 
+  const resultListElem = document.getElementById('py_result_list')
+  const element = document.createElement('li')
+  element.innerText = "終了しました. 終了コード: " + code;
+  resultListElem.appendChild(element)
 }
