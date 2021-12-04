@@ -3,7 +3,7 @@ window.addEventListener('DOMContentLoaded', () => {
   document.getElementById('run_py_button').addEventListener('click', (e) => {
     onClickRunPythonButton()
   })
-  window.api.addEventListenerFromPython(listener)
+  window.api.addListenerOnPythonMessage(onPythonMessage)
 })
 
 /**
@@ -62,7 +62,7 @@ const onClickFileName = async (e) => {
 /**
  * Pythonプログラムから message が送信されたタイミングで発火するイベント
  */
-const listener = (message) => { 
+const onPythonMessage = (message) => { 
   const resultListElem = document.getElementById('py_result_list')
   const element = document.createElement('li')
   element.innerText = message
