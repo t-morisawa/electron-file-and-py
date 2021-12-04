@@ -4,6 +4,7 @@ window.addEventListener('DOMContentLoaded', () => {
     onClickRunPythonButton()
   })
   window.api.addListenerOnPythonMessage(onPythonMessage)
+  window.api.addListenerOnPythonEnd(onPythonEnd)
 })
 
 /**
@@ -66,5 +67,15 @@ const onPythonMessage = (message) => {
   const resultListElem = document.getElementById('py_result_list')
   const element = document.createElement('li')
   element.innerText = message
+  resultListElem.appendChild(element)
+}
+
+/**
+ * Pythonプログラムが終了したときに発火するイベント
+ */
+ const onPythonEnd = (code, signal) => { 
+  const resultListElem = document.getElementById('py_result_list')
+  const element = document.createElement('li')
+  element.innerText = "終了しました. 終了コード: " + code;
   resultListElem.appendChild(element)
 }

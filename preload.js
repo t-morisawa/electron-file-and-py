@@ -23,4 +23,10 @@ contextBridge.exposeInMainWorld('api', {
       (event, message) => listener(message),
     );
   },
+  addListenerOnPythonEnd: (listener) => {
+    ipcRenderer.on(
+      "end-python",
+      (event, code, signal) => listener(code, signal),
+    );
+  },
 });
