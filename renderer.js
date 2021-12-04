@@ -3,17 +3,13 @@ window.addEventListener('DOMContentLoaded', () => {
   document.getElementById('run_py_button').addEventListener('click', (e) => {
     onClickRunPythonButton()
   })
+  window.api.onReceiveMessage(listener)
 })
 
 const onClickRunPythonButton = async () => {
   const resultListElem = document.getElementById('py_result_list')
   resultListElem.innerHTML = ""
-  const results = await window.api.runPy();
-  results.forEach((result) => {
-    const element = document.createElement('li')
-    element.innerText = result
-    resultListElem.appendChild(element)
-  })
+  window.api.runPy();
 }
 
 const showFileList = async () => {
@@ -57,4 +53,11 @@ const onClickFileName = async (e) => {
     imageListElem.style.display = "none"
     imageElem.src = e.target.dataset.fullPath
   }
+}
+
+const listener = (message) => { 
+  const resultListElem = document.getElementById('py_result_list')
+  const element = document.createElement('li')
+  element.innerText = message
+  resultListElem.appendChild(element)
 }

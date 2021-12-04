@@ -37,10 +37,7 @@ app.whenReady().then(() => {
   });
 
   ipcMain.handle('run_py', async (e) => {
-    res = await run_py()
-    if (res.success == true) {
-      return res.results
-    }
+    await run_py()
   });
 })
 
