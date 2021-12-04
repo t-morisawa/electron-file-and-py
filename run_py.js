@@ -6,7 +6,7 @@ const run_py = () => {
   const webcontent = webContents.getAllWebContents()[0]
 
   pyshell.on('message', function (message) {
-    webcontent.send("message-from-python", message)
+    webcontent.send("python-message", message)
   });
 
   pyshell.end(function (err,code,signal) {
@@ -14,7 +14,7 @@ const run_py = () => {
     console.log('The exit code was: ' + code);
     console.log('The exit signal was: ' + signal);
     console.log('finished');
-    webcontent.send("end-python", code, signal)
+    webcontent.send("python-end", code, signal)
   });
 }
 

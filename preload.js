@@ -19,13 +19,13 @@ contextBridge.exposeInMainWorld('api', {
   runPy: () => ipcRenderer.invoke('run_py'),
   addListenerOnPythonMessage: (listener) => {
     ipcRenderer.on(
-      "message-from-python",
+      "python-message",
       (event, message) => listener(message),
     );
   },
   addListenerOnPythonEnd: (listener) => {
     ipcRenderer.on(
-      "end-python",
+      "python-end",
       (event, code, signal) => listener(code, signal),
     );
   },
