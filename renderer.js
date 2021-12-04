@@ -3,7 +3,7 @@ window.addEventListener('DOMContentLoaded', () => {
   document.getElementById('run_py_button').addEventListener('click', (e) => {
     onClickRunPythonButton()
   })
-  window.api.onReceiveMessage(listener)
+  window.api.addEventListenerFromPython(listener)
 })
 
 /**
