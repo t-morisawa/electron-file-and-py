@@ -6,7 +6,11 @@ window.addEventListener('DOMContentLoaded', () => {
   window.api.onReceiveMessage(listener)
 })
 
-const onClickRunPythonButton = async () => {
+/**
+ * Pythonプログラムの実行命令
+ * レンダラプロセスではawaitしない(Pythonプロセスの終了を待たない)
+ */
+const onClickRunPythonButton = () => {
   const resultListElem = document.getElementById('py_result_list')
   resultListElem.innerHTML = ""
   window.api.runPy();
@@ -55,6 +59,9 @@ const onClickFileName = async (e) => {
   }
 }
 
+/**
+ * Pythonプログラムから message が送信されたタイミングで発火するイベント
+ */
 const listener = (message) => { 
   const resultListElem = document.getElementById('py_result_list')
   const element = document.createElement('li')
