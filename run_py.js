@@ -1,7 +1,7 @@
 const { PythonShell } = require('python-shell');
 const { webContents } = require('electron')
 
-const run_py = async () => {
+const run_py = () => {
   let pyshell = new PythonShell('./py/hello.py', {pythonOptions: ['-u']});
   const webcontent = webContents.getAllWebContents()[0]
 
