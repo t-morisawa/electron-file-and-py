@@ -36,6 +36,10 @@ app.whenReady().then(() => {
     return get_images_and_dirs(path)
   });
 
+  ipcMain.handle('select_directory', async (e) => {
+    return await selectDirectory()
+  });
+
   ipcMain.handle('run_py', (e) => {
     run_py()
   });
@@ -53,3 +57,4 @@ app.on('window-all-closed', () => {
 // 別々のファイルに分割してここで require することもできます。
 const { get_images_and_dirs } = require('./file')
 const { run_py } = require('./run_py')
+const { selectDirectory } = require('./dialog')
