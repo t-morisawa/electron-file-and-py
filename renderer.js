@@ -1,5 +1,4 @@
 window.addEventListener('DOMContentLoaded', () => {
-  showFileList()
   document.getElementById('run_py_button').addEventListener('click', (e) => {
     onClickRunPythonButton()
   })
@@ -20,8 +19,14 @@ const onClickRunPythonButton = () => {
   window.api.runPy();
 }
 
-const showFileList = async () => {
-  const rootDir = "/tmp/sample";
+const onClickSelectDirButton = async () => {
+  const dirname = await window.api.selectDirectory();
+  if (dirname !== null) {
+    await showFileList(dirname);
+  }
+}
+
+const showFileList = async (rootDir) => {
   const fileList = await window.api.getImagesAndDirs(rootDir);
   const fileListElem = document.getElementById('file_list')
   fileList.forEach((file) => {
@@ -81,9 +86,4 @@ const onPythonMessage = (message) => {
   const element = document.createElement('li')
   element.innerText = "終了しました. 終了コード: " + code;
   resultListElem.appendChild(element)
-}
-
-const onClickSelectDirButton = async () => {
-  const filename = await window.api.selectDirectory();
-  console.log(filename);
 }

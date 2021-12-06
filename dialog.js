@@ -8,11 +8,7 @@ const selectDirectory = async () => {
       defaultPath: '.',
   });
   const path = filenames.canceled ? null : filenames.filePaths[0];
-  const response = {
-    'canceled': filenames.canceled,
-    'path': path,
-  }
-  return response
+  return path
 }
 
 module.exports = {
