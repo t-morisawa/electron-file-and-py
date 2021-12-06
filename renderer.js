@@ -5,6 +5,9 @@ window.addEventListener('DOMContentLoaded', () => {
   })
   window.api.addListenerOnPythonMessage(onPythonMessage)
   window.api.addListenerOnPythonEnd(onPythonEnd)
+  document.getElementById('select_dir_button').addEventListener('click', (e) => {
+    onClickSelectDirButton()
+  })
 })
 
 /**
@@ -78,4 +81,9 @@ const onPythonMessage = (message) => {
   const element = document.createElement('li')
   element.innerText = "終了しました. 終了コード: " + code;
   resultListElem.appendChild(element)
+}
+
+const onClickSelectDirButton = async () => {
+  const filename = await window.api.selectDirectory();
+  console.log(filename);
 }

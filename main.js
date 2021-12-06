@@ -39,6 +39,11 @@ app.whenReady().then(() => {
   ipcMain.handle('run_py', (e) => {
     run_py()
   });
+
+  ipcMain.handle('select_directory', (e) => {
+    return selectDirectory()
+  });
+
 })
 
 // macOS を除き、全ウインドウが閉じられたときに終了します。 ユーザーが
@@ -53,3 +58,4 @@ app.on('window-all-closed', () => {
 // 別々のファイルに分割してここで require することもできます。
 const { get_images_and_dirs } = require('./file')
 const { run_py } = require('./run_py')
+const { selectDirectory } = require('./dialog')
