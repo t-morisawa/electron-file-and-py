@@ -1,19 +1,18 @@
 const { dialog, BrowserWindow } = require('electron')
 
-const selectDirectory = () => {
+const selectDirectory = async () => {
   const window = BrowserWindow.getAllWindows()[0]
-  /**
-   * return {
-   *   canceled: bool
-   *   filePaths: Array<string>
-   * }
-   */
-  let filenames = dialog.showOpenDialog(window, {
+  const filenames = await dialog.showOpenDialog(window, {
       properties: ['openDirectory'],
       title: 'ディレクトリを選択してください',
       defaultPath: '.',
   });
-  return filenames
+  const path = filenames.canceled ? null : filenames.filePaths[0];
+  const response = {
+    'canceled': filenames.canceled,
+    'path': path,
+  }
+  return response
 }
 
 module.exports = {

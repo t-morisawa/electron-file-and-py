@@ -36,14 +36,13 @@ app.whenReady().then(() => {
     return get_images_and_dirs(path)
   });
 
+  ipcMain.handle('select_directory', async (e) => {
+    return await selectDirectory()
+  });
+
   ipcMain.handle('run_py', (e) => {
     run_py()
   });
-
-  ipcMain.handle('select_directory', (e) => {
-    return selectDirectory()
-  });
-
 })
 
 // macOS を除き、全ウインドウが閉じられたときに終了します。 ユーザーが
