@@ -1,12 +1,16 @@
 const { PythonShell } = require('python-shell');
 const { webContents } = require('electron')
 
+const send = (channel, ...args) => {
+  for (const webcontent of webContents.getAllWebContents()) {
+    webcontent.send(channel, ...args)
+  }
+}
+
 const run_py = () => {
   let pyshell = new PythonShell('./py/hello.py', {pythonOptions: ['-u']});
-  const webcontent = webContents.getAllWebContents()[0]
-
   pyshell.on('message', function (message) {
-    webcontent.send("python-message", message)
+    send("python-message", message)
   });
 
   pyshell.end(function (err,code,signal) {
@@ -14,7 +18,7 @@ const run_py = () => {
     console.log('The exit code was: ' + code);
     console.log('The exit signal was: ' + signal);
     console.log('finished');
-    webcontent.send("python-end", code, signal)
+    send("python-end", code, signal)
   });
 }
 

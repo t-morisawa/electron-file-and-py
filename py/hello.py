@@ -1,7 +1,8 @@
 import time
 
-print('hello world by Python')
+MAX = 100
 
-time.sleep(1)
 
-print('hello world by Python(2)')
+for i in range(MAX):
+    print(i)
+    time.sleep(2)
